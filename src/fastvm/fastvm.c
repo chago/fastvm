@@ -1,7 +1,6 @@
 ﻿
 #include "mcore/mcore.h"
 #include "vm.h"
-#include "libdobc.h"
 
 static const char help[] = {
     "fastvm "FASTVM_VERSION" - Copyright (C) 2020-2025 Zhengxianwei\n"
@@ -27,15 +26,14 @@ static const char version[] =
 #endif
 ")\n";
 
+#if defined(FASTVM_EXE)
 int main(int argc, char **argv)
 {
     int opt;
     VMState *s = dobc_new();
     opt = dobc_parse_args(s, argc, argv);
 
-    if (s->filename) {
-        s->filedata = file_load(s->filename, &s->filelen);
-    }
+    dobc_load_file(s);
 
     if (opt == OPT_HELP)
         return fputs(help, stdout), 0;
@@ -57,3 +55,4 @@ int main(int argc, char **argv)
 
     return 0;
 }
+#endif

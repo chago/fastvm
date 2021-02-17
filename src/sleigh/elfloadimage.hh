@@ -1,17 +1,16 @@
 ﻿
-
 #include "loadimage.hh"
 
 class ElfLoadImage : public LoadImageB {
     long long baseaddr;
     unsigned char*  filedata;
-    int             filelen;
+    int				filelen;
 
     int is64bit;
     FILE *fp;
     int cur_sym;
     AddrSpace *codespace;
-    struct bitset *isdata;
+    //struct bitset *isdata;
 
 public:
     ElfLoadImage(const char *filename);
